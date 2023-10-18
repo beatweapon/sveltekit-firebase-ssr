@@ -1,9 +1,12 @@
-<script lang="ts">
+<script>
 	import { getFirebaseClient } from '$lib/firebase_client';
 	import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
-	let form: HTMLFormElement;
-	async function login(): Promise<void> {
+	/**
+	 * @type {HTMLFormElement}
+	 */
+	let form;
+	async function login() {
 		try {
 			const auth = getFirebaseClient();
 			if (auth.error) {

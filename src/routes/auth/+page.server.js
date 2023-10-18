@@ -1,7 +1,9 @@
 import { redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
 import { getFirebaseServer } from '$lib/server/firebase_server';
 
+/**
+ * @type {import('./$types').Actions}
+ */
 export const actions = {
 	default: async ({ request, cookies }) => {
 		const form = await request.formData();
@@ -16,7 +18,8 @@ export const actions = {
 
 		// Expires in 5 days
 		const expiresIn = 60 * 60 * 24 * 5;
-		let sessionCookie: string;
+		/** @type {string} */
+		let sessionCookie;
 		try {
 			sessionCookie = await admin.data
 				.auth()
@@ -36,4 +39,4 @@ export const actions = {
 
 		throw redirect(303, '/');
 	}
-} satisfies Actions;
+};

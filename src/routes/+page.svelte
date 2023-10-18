@@ -1,7 +1,5 @@
-<script lang="ts">
-	import type { PageData } from './$types';
-
-	export let data: PageData;
+<script>
+	export let data;
 </script>
 
 <h1>Welcome to SvelteAuth</h1>
