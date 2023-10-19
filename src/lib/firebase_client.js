@@ -1,6 +1,6 @@
 import { PUBLIC_API_KEY, PUBLIC_AUTH_DOMAIN } from '$env/static/public';
 import { initializeApp } from 'firebase/app';
-import { getAuth, setPersistence } from 'firebase/auth';
+import { getAuth, setPersistence, inMemoryPersistence } from 'firebase/auth';
 
 /**
  * A function that returns a Firebase client result.
@@ -27,9 +27,8 @@ export function getFirebaseClient() {
 		};
 		const app = initializeApp(firebaseConfig);
 		const auth = getAuth(app);
-		/** @type {import('firebase/auth').Persistence} */
-		const persistance = { type: 'NONE' };
-		void setPersistence(auth, persistance);
+
+		void setPersistence(auth, inMemoryPersistence);
 		return { error: false, data: auth };
 	} catch (error) {
 		console.error(error);
