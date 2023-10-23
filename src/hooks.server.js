@@ -3,8 +3,7 @@ import { building } from '$app/environment';
 import { getFirebaseServer } from '$lib/server/firebase_server';
 
 export const handle = async ({ event, resolve }) => {
-	event.locals.id = '';
-	event.locals.email = '';
+	event.locals.currentUser = undefined;
 
 	const isAuth = event.url.pathname === '/auth';
 	if (isAuth || building) {
@@ -27,10 +26,12 @@ export const handle = async ({ event, resolve }) => {
 	}
 
 	const { uid, email } = decodedClaims;
-	event.locals.id = uid;
-	event.locals.email = email || '';
+	event.locals.currentUser = {
+		id: uid,
+		email: email || ''
+	};
 
-	if (!event.locals.id) {
+	if (!event.locals.currentUser.id) {
 		throw redirect(303, '/auth');
 	}
 
