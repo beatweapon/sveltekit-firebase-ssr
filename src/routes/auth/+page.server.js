@@ -29,7 +29,7 @@ export const actions = {
 			throw redirect(303, '/auth');
 		}
 
-		cookies.set('session', sessionCookie, {
+		cookies.set('__session', sessionCookie, {
 			maxAge: expiresIn,
 			path: '/',
 			httpOnly: true,

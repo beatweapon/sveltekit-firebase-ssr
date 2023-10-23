@@ -8,11 +8,11 @@ export const handle = async ({ event, resolve }) => {
 
 	const isAuth = event.url.pathname === '/auth';
 	if (isAuth || building) {
-		event.cookies.set('session', '');
+		event.cookies.set('__session', '');
 		return await resolve(event);
 	}
 
-	const session = event.cookies.get('session') || '';
+	const session = event.cookies.get('__session') || '';
 	const admin = getFirebaseServer();
 	if (admin.error) {
 		throw redirect(303, '/auth');
