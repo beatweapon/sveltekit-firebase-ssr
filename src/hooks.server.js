@@ -8,7 +8,7 @@ export const handle = async ({ event, resolve }) => {
 
 	const isAuth = event.url.pathname === '/auth';
 	if (isAuth || building) {
-		event.cookies.set('__session', '');
+		event.cookies.set('__session', '', { maxAge: 0 });
 		return await resolve(event);
 	}
 
